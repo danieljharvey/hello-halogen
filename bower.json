@@ -12,6 +12,8 @@
     "purescript-halogen": "^4.0.0",
     "purescript-prelude": "^4.1.0",
     "purescript-console": "^4.1.0",
-    "purescript-effect": "^2.0.0"
+    "purescript-effect": "^2.0.0",
+    "purescript-js-date": "^6.0.0",
+    "purescript-datetime": "^4.0.0"
   }
 }

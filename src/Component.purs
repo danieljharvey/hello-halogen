@@ -1,19 +1,14 @@
 module Component where
 
 import Prelude
-
 import Data.Maybe (Maybe(..))
-
 import Halogen as H
 import Halogen.HTML as HH
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
-          
-data Query a = ToggleState a 
-             | ChangeName String a
-             | Reset a
+import App.State
+import Data.JSDate (toTimeString)
 
-type State = { on :: Boolean, name :: String }
 
 component :: forall m. H.Component HH.HTML Query Unit Void m
 component =
@@ -37,6 +32,8 @@ component =
           [ HH.text "Why not toggle this button:" ]
       , HH.input
           [ HP.value state.name, HE.onValueInput (HE.input ChangeName) ] 
+      , HH.input
+          [ HP.value $ toTimeString state.pageOne.dateOfBirth, HE.onValueInput (HE.input ChangeDate) ] 
       , HH.button
           [ HE.onClick (HE.input_ ToggleState) ]
           [ HH.text
