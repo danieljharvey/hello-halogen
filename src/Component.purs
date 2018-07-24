@@ -2,18 +2,13 @@ module Component where
 
 import Prelude
 
+import App.State (State, Query(..), appState)
 import Data.Maybe (Maybe(..))
-
+import App.Form.PageOne (renderPageOne)
 import Halogen as H
 import Halogen.HTML as HH
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
-          
-data Query a = ToggleState a 
-             | ChangeName String a
-             | Reset a
-
-type State = { on :: Boolean, name :: String }
 
 component :: forall m. H.Component HH.HTML Query Unit Void m
 component =
@@ -26,7 +21,7 @@ component =
   where
 
   initialState :: State
-  initialState = { on: false, name: "Horse" }
+  initialState = appState
 
   render :: State -> H.ComponentHTML Query
   render state =
@@ -47,6 +42,7 @@ component =
       , HH.button
           [ HE.onClick (HE.input_ Reset) ]
           [ HH.text "Reset" ]
+      , renderPageOne state.pageOne      
       ]
 
   eval :: Query ~> H.ComponentDSL State Query Void m
